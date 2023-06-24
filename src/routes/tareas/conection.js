@@ -72,16 +72,23 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
 }
 
 
-//Creacion de tarea + asignacion (INTERFAZ 4)
-const create_task = async(cod_user,cod_etapa,comentario,fecha_inicio,fecha_fin,hora_inicio,hora_fin) => {
-  const last =  last_project();
+//Creacion de tarea + asignacion (INTERFAZ 4){revisar entrada de la hora TIME '13:00'}
+const create_task = async(cod_user,descripcion_tarea,cod_etapa,nombre_tarea,comentario,fecha_asignada,hora_inicio,hora_fin,cod_grupo) => {
+ 
+  const last =  last_event();
   const number = last.substring(2); 
   number = parseInt(number) + 1; 
-  const newcode = "PT" + number; 
+  const newcode = "EV" + number;
 
-  const txt='insert into proyecto values (\''+newcode+'\',\''+nombre+'\',\''+description+'\','+fecha_inicio+'\','+fecha_fin+'\',\'planificado\',\''+jefe_proyecto+'\',\''+cod_grupo+'\')';
-  const res = await pool.query(txt);
-  console.log(res);
+  const txt_evento = 'insert into evento values (\'' + newcode + '\', \'' + descripcion_tarea + '\', TIME \'' + hora_inicio + '\', TIME \'' + hora_fin + '\', \'' + fecha_fin + '\', null , \'' + cod_grupo + '\')';
+  const res_evento = await pool.query(txt_evento);
+  const txt_tarea='insert into tarea values (\''+newcode+'\',\''+cod_etapa+'\',\''+nombre_tarea+'\',TO_DATE(\''+fecha_asignada+'\',\'DD/MM/YYYY\')';
+  const res_tarea = await pool.query(txt_tarea);
+  const txt_asig='insert into asignacion values (\''+cod_user+'\',\''+newcode+'\',\'pendiente\','+comentario+'\',1)';
+  const res_asig = await pool.query(txt_asig);
+  console.log(res_evento);
+  console.log(res_tarea);
+  console.log(res_asig);
   //pool.end();
 }
-module.exports = { create_project, main_projects , pool};
+module.exports = { create_project, main_projects ,create_task, pool};
