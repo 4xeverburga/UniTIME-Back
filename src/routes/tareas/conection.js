@@ -48,4 +48,4 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
 }
 
 
-module.exports = { get_work, create_work , pool};
+module.exports = { create_project, main_projects , pool};
