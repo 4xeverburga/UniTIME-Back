@@ -47,5 +47,5 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
   //pool.end();
 }
 //hola
-
+const hello = "hola";
 module.exports = { create_project, main_projects , pool};
