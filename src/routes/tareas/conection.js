@@ -71,7 +71,12 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
   //pool.end();
 }
 
-
+//mostrar etapas segun proyecto para crear la tarea para el interfaz 4(NO ESTA AÑADIDO EN EL DOC)
+const show_stages = async(id_proyecto) =>{
+  const txt = 'SELECT e.nombre, e.descripcion, e.fecha_fin FROM etapa e JOIN proyecto p ON p.'+id_proyecto+' = e.'+id_proyecto;
+  const res = await pool.query(txt);
+  console.log(res);
+}
 //Creacion de tarea + asignacion (INTERFAZ 4){revisar entrada de la hora TIME '13:00'}
 const create_task = async(cod_user,descripcion_tarea,cod_etapa,nombre_tarea,comentario,fecha_asignada,hora_inicio,hora_fin,cod_grupo) => {
  
@@ -91,4 +96,4 @@ const create_task = async(cod_user,descripcion_tarea,cod_etapa,nombre_tarea,come
   console.log(res_asig);
   //pool.end();
 }
-module.exports = { create_project, main_projects ,create_task, pool};
+module.exports = { create_project, main_projects ,create_task, show_stages, pool};
