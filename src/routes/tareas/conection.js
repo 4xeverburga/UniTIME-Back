@@ -2,9 +2,9 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'postgres',
-  password: '123',
-  port: 5433, 
+  database: 'databse_drop',
+  password: 'jonathan28',
+  port: 5432, 
 });
 //retorna el ultimo proyecto actualizado (funcion de apoyo) ✓
 const last_project = async() => {
