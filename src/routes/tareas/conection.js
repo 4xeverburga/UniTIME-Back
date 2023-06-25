@@ -54,14 +54,13 @@ const main_projects = async() => {
   try {
     const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 4';
     const res = await pool.query(txt);
-    console.log(res);
     return res.rows; 
   } catch (error) {
     console.error('Error al obtener los datos:', error);
     throw error;
   }
 }
-//creacion de proyectos (INTERFAZ 1) 
+//creacion de proyectos (INTERFAZ 1) ✓
 const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proyecto,cod_grupo) => {
   try {
     const last = last_project();
@@ -69,7 +68,7 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
       const number = resultado.id_proyecto.slice(2);
       const numb = parseInt(number) + 1;
       const newcode = 'PT' + numb;
-      const txt='insert into proyecto values (\''+newcode+'\',\''+nombre+'\',\''+description+'\','+fecha_inicio+'\','+fecha_fin+'\',\'planificado\',\''+jefe_proyecto+'\',\''+cod_grupo+'\')';
+      const txt='insert into proyecto values (\''+newcode+'\',\''+nombre+'\',\''+description+'\',\''+fecha_inicio+'\',\''+fecha_fin+'\',\'planificado\',\''+jefe_proyecto+'\',\''+cod_grupo+'\')';
       pool.query(txt);
      
      console.log('Los datos se han guardado correctamente en la base de datos.');
@@ -115,3 +114,15 @@ module.exports = { create_project, main_projects ,create_task, get_stages_for_pr
 //const xd = create_task('US123456','tarea de prueba','ET345678','tarea1','comentario','01/01/2021','13:00','14:00','GR456789');
 //const a = await last_event();
 //console.log( a);
+//create_project('proyecto1','descripcion','01/01/2021','01/01/2021','US123456','GR456789');
+
+/*const prueba = main_projects();
+prueba.then(resultado => {
+  let i = 0;
+  resultado.forEach(element => { 
+    i++;
+    console.log('Nombre '+ i+': ' +element.nombre);
+    console.log('fecha_inicio '+ i+': ' +element.fecha_inicio);
+    console.log('fecha_fin '+ i+': ' +element.fecha_fin);
+  } );
+});*/
