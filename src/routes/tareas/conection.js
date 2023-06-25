@@ -49,7 +49,7 @@ const last_etapa = async() => {
 //Carga de página con los 4 proyectos que aparecen (INTERFAZ 1)
 const main_projects = async() => {
   try {
-    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 4';
+    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 100';
     const res = await pool.query(txt);
     console.log(res);
     return res.rows; 
