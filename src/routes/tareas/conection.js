@@ -3,7 +3,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'UNI_TIME',
-  password: 'jonathan28',
+  password: 'psw',
   port: 5432, 
 });
 //retorna el ultimo proyecto actualizado (funcion de apoyo)
