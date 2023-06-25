@@ -2,8 +2,8 @@ const { Pool } = require('pg');
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'UNI_TIME',
-  password: 'psw',
+  database: 'databse_drop',
+  password: 'jonathan28',
   port: 5432, 
 });
 //retorna el ultimo proyecto actualizado (funcion de apoyo)
@@ -73,7 +73,8 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
 
 //mostrar etapas segun proyecto para crear la tarea para el interfaz 4(NO ESTA AÑADIDO EN EL DOC)
 const show_stages = async(id_proyecto) =>{
-  const txt = 'SELECT e.nombre, e.descripcion, e.fecha_fin FROM etapa e JOIN proyecto p ON p.'+id_proyecto+' = e.'+id_proyecto;
+  console.log(id_proyecto);
+  const txt = 'SELECT e.nombre, e.descripcion, e.fecha_fin FROM etapa e JOIN proyecto p ON p.id_proyecto = e.id_proyecto where e.id_proyecto =\''+id_proyecto+'\'';
   const res = await pool.query(txt);
   console.log(res);
 }
@@ -97,3 +98,4 @@ const create_task = async(cod_user,descripcion_tarea,cod_etapa,nombre_tarea,come
   //pool.end();
 }
 module.exports = { create_project, main_projects ,create_task, show_stages, pool};
+const xd = show_stages('PT234567');
