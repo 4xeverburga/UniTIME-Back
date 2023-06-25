@@ -3,10 +3,9 @@ const express = require('express');
 const db = require('./db-config');
 const {sql} = require('@databases/pg');
 const cors = require('cors');
-
 const corsOptions = { origin:'*' };
 const app = express();
-
+const modulos  = require('./conection.js');
 
 
 // pedir las ultimas 100 proyectos de acuerdo a fecha
@@ -25,6 +24,19 @@ app.get('/api/tareas/proyectos', cors(corsOptions), async (req, res) => {
     //     throw error;
     // }
 });
+
+// pedir los ultimas 100 proyectos segun codigo de grupo
+app.get('/api/tareas/proyectos', cors(corsOptions), async (req, res) => {
+    // try {
+    //     const result = await db.query(sql`SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 100`);
+    //     res.json(result);
+    // } catch (error) {
+    //     console.error('Error al obtener los datos:', error);
+    //     throw error;
+    // }
+});
+
+
 
 // agregar un nuevo proyecto
 app.post('/api/tareas/add/proyecto', (req, res) => {
