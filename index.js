@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const colors = require("colors");
 
+const routerApi = require('./src/routes/indexRoutes');
 
 
 const app = express();
@@ -29,3 +30,6 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`.green);
 });
+
+//agregando las rutas o como se llame xd:
+routerApi(app);
