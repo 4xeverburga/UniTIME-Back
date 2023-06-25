@@ -45,9 +45,9 @@ const last_etapa = async() => {
 }
 
 //Carga de página con los 4 proyectos que aparecen (INTERFAZ 1) (la salida del date es:Wed Feb 01 2023 00:00:00 GMT-0500 (hora estándar de Perú) ) ✓
-const main_projects = async() => {
+const get_projects_for_grupo = async(cod_grupo) => {
   try {
-    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 100 where';
+    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto where cod_grupo = \''+cod_grupo+'\' ORDER BY fecha_inicio LIMIT 100 ';
     const res = await pool.query(txt);
     return res.rows; 
   } catch (error) {
@@ -105,14 +105,14 @@ const create_task = async (cod_user, descripcion_tarea, cod_etapa, nombre_tarea,
   }
 };
 
-module.exports = { create_project, main_projects ,create_task, get_stages_for_project, pool};
+module.exports = { create_project, get_projects_for_grupo ,create_task, get_stages_for_project, pool};
 
 //PRUEBASSS:
 //const xd = create_task('US123456','tarea de prueba','ET345678','tarea1','comentario','01/01/2021','13:00','14:00','GR456789');
 //const a = await last_event();
 //console.log( a);
 //create_project('proyecto1','descripcion','01/01/2021','01/01/2021','US123456','GR456789');
-/*const prueba = main_projects();
+/*const prueba = get_projects_for_grupo('GR456789');
 prueba.then(resultado => {
   let i = 0;
   resultado.forEach(element => { 

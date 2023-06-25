@@ -25,7 +25,7 @@ app.get('/api/tareas/proyectos', cors(corsOptions), async (req, res) => {
     // }
 });
 
-// pedir los ultimas 100 proyectos segun codigo de grupo
+// pedir los ultimas 100 proyectos segun codigo de grupo (MENCIONAR QUE ES PARA LA INTERFAZ 1 Y NECESITA UN GRUPO)
 app.get('/api/tareas/proyectos', cors(corsOptions), async (req, res) => {
     // try {
     //     const result = await db.query(sql`SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 100`);
@@ -34,6 +34,13 @@ app.get('/api/tareas/proyectos', cors(corsOptions), async (req, res) => {
     //     console.error('Error al obtener los datos:', error);
     //     throw error;
     // }
+    try {
+        const result = await db.query(sql`SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 100`);
+        res.json(result);
+    }
+    catch (error) { console.error('Error al obtener los datos:', error); 
+    throw error; 
+    }
 });
 
 
