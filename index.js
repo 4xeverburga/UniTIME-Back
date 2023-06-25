@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the application." });
 });
-
+app.use('/api/grupos',require('./src/routes/grupos/grupos_api'));
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
