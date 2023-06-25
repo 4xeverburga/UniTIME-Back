@@ -52,7 +52,7 @@ const last_etapa = async() => {
 //Carga de página con los 4 proyectos que aparecen (INTERFAZ 1) (la salida del date es:Wed Feb 01 2023 00:00:00 GMT-0500 (hora estándar de Perú) ) ✓
 const main_projects = async() => {
   try {
-    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 4';
+    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto ORDER BY fecha_inicio LIMIT 100';
     const res = await pool.query(txt);
     return res.rows; 
   } catch (error) {
