@@ -4,7 +4,7 @@ const pool = new Pool({
   host: 'localhost',
   database: 'postgres',
   password: '123',
-  port: 5432, 
+  port: 5433, 
 });
 //retorna el ultimo proyecto actualizado (funcion de apoyo) ✓
 const last_project = async() => {
