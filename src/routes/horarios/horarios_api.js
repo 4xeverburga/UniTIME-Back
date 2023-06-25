@@ -9,7 +9,7 @@ router.get('/',(req,res)=>{
   res.send('Funciona');
   });
 
-//mostrar el horario por codigo
+//mostrar el horario por codigodehorario
 router.get('/:id',cors(corsOptions),getHorarioById);
 
 
