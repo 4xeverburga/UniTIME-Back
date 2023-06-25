@@ -33,10 +33,9 @@ const last_event = async() => {
 //retorna el ultimo evento actualizado (funcion de apoyo){REVISARRRRRRRRR}
 const last_etapa = async() => {
   try {
-    const txt='SELECT cod_evento FROM evento ORDER BY cod_evento DESC LIMIT 1';
+    const txt='SELECT id_etapa FROM evento ORDER BY id_etapa DESC LIMIT 1';
     const res = await pool.query(txt);
-    console.log(res);
-    return res; 
+    return res.rows[0]; 
   } catch (error) {
     console.error('Error al obtener los datos:', error);
     throw error;
@@ -47,7 +46,7 @@ const last_etapa = async() => {
 //Carga de página con los 4 proyectos que aparecen (INTERFAZ 1) (la salida del date es:Wed Feb 01 2023 00:00:00 GMT-0500 (hora estándar de Perú) ) ✓
 const get_projects_for_grupo = async(cod_grupo) => {
   try {
-    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto where cod_grupo = \''+cod_grupo+'\' ORDER BY fecha_inicio LIMIT 100 ';
+    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto where cod_grupo = \''+cod_grupo+'\' ORDER BY fecha_fin LIMIT 100 ';
     const res = await pool.query(txt);
     return res.rows; 
   } catch (error) {
@@ -73,10 +72,38 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
   }
 }
 
+
+//entrega de todas las tareas que se encuentran en una etapa(para el admin) (INTERFAZ 2) ✓
+const get_tasks_for_stage = async (id_etapa) => {
+  try {
+    const txt = 'select * from tarea where cod_etapa = \''+id_etapa+'\'ORDER BY dia_asignado LIMIT 100';
+    const res = await pool.query(txt);
+    return res.rows;
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+    throw error;
+  }
+};
+//entrega de todas las tareas pertenecientes al user que se encuentran en una etapa (INTERFAZ 2) ✓
+const get_tasks_for_stage_user = async (id_etapa,cod_usuario) => {
+  try {
+    const txt = 'select * from tarea where cod_etapa = \''+id_etapa+'\' and cod_evento in (select cod_evento from asignacion where cod_usuario = \''+cod_usuario+'\') ORDER BY dia_asignado LIMIT 100';
+    const res = await pool.query(txt);
+    return res.rows;
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+    throw error;
+  }
+};
+
+
+
+
+
 //mostrar etapas segun proyecto para crear la tarea para el interfaz 4(NO ESTA AÑADIDO EN EL DOC) ✓
 const get_stages_for_project = async (id_proyecto) => {
   try {
-    const txt = 'SELECT e.nombre, e.descripcion, e.fecha_fin FROM etapa e JOIN proyecto p ON p.id_proyecto = e.id_proyecto where e.id_proyecto =\''+id_proyecto+'\'';
+    const txt = 'SELECT * FROM etapa WHERE id_proyecto =\''+id_proyecto+'\'ORDER BY fecha_inicio LIMIT 100';
     const res = await pool.query(txt);
     return res.rows; 
   } catch (error) {
@@ -105,7 +132,7 @@ const create_task = async (cod_user, descripcion_tarea, cod_etapa, nombre_tarea,
   }
 };
 
-module.exports = { create_project, get_projects_for_grupo ,create_task, get_stages_for_project, pool};
+module.exports = { create_project, get_projects_for_grupo ,create_task, get_stages_for_project,get_tasks_for_stage,get_tasks_for_stage_user, pool};
 
 //PRUEBASSS:
 //const xd = create_task('US123456','tarea de prueba','ET345678','tarea1','comentario','01/01/2021','13:00','14:00','GR456789');
@@ -122,3 +149,13 @@ prueba.then(resultado => {
     console.log('fecha_fin '+ i+': ' +element.fecha_fin);
   } );
 });*/
+/*const prueba = get_tasks_for_stage('ET345678');
+prueba.then(resultado => {
+  let i = 0;
+  resultado.forEach(element => { 
+    i++;
+    console.log('Nombre '+ i+': ' +element.nombre);
+    console.log('dia_asignado '+ i+': ' +element.dia_asignado);
+  } );
+}
+);*/
