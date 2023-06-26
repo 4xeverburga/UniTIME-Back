@@ -144,7 +144,14 @@ const create_task = async (cod_user, descripcion_tarea, cod_etapa, nombre_tarea,
   }
 };
 
-module.exports = { create_project, get_projects_for_grupo ,create_task, get_stages_for_project,get_tasks_for_stage,get_tasks_for_stage_user,calificar_tarea, pool};
+module.exports = { 
+  create_project, 
+  get_projects_for_grupo ,
+  create_task, 
+  get_stages_for_project,
+  get_tasks_for_stage,get_tasks_for_stage_user,
+  calificar_tarea
+};
 
 //PRUEBASSS:
 //const xd = create_task('US123456','tarea de prueba','ET345678','tarea1','comentario','01/01/2021','13:00','14:00','GR456789');
@@ -171,8 +178,5 @@ prueba.then(resultado => {
   } );
 }
 );*/
-calificar_tarea('US234567','EV234567',5);
+//calificar_tarea('US234567','EV234567',5);
 
-module.exports = {
-  
-}
