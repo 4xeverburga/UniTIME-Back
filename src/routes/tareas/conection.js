@@ -128,7 +128,7 @@ const create_task = async (cod_user, descripcion_tarea, cod_etapa, nombre_tarea,
   try {
     const last = last_event();
      last.then(resultado => {
-      const number = resultado.cod_evento.slice(2);
+      const number = resultado.cod_evento.slice(2); 
       const numb = parseInt(number) + 1;
       const newcode = 'EV' + numb;
       const txt_evento = 'insert into evento values (\'' + newcode + '\', \'' + descripcion_tarea + '\', TIME \'' + hora_inicio + '\', TIME \'' + hora_fin + '\', null , \'' + cod_grupo + '\')';

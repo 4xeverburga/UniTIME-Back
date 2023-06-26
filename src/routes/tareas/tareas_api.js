@@ -61,6 +61,26 @@ router.get('/tareas/:idEtapa/:idUsuario', (req,res) =>{
 	});
 });
 
-
+// Peticion para crear tareas
+router.get('/tareas/create_task', (req,res) =>{
+	const idUsuario = req.params.idUsuario;
+	const descripcion_tarea = req.params.descripcion_tarea;
+	const idEtapa = req.params.idEtapa;
+	const nombre_tarea = req.params.nombre_tarea;
+	const comentario = req.params.comentario;
+	const fecha_asignada = req.params.fecha_asignada;
+	const hora_inicio = req.params.hora_inicio;
+	const hora_fin = req.params.hora_fin;
+	const idGrupo = req.params.idGrupo;
+	const result = modulos.create_task(idUsuario,descripcion_tarea,idEtapa,nombre_tarea,comentario,fecha_asignada,hora_inicio,hora_fin,idGrupo);
+	result.then(resultado => {
+		console.log(resultado);
+		res.json(resultado);
+		}).catch((err) => {
+		console.error(err.message);
+		res.status(500).json({ error: 'Internal server error' });
+	});
+}
+);
 
 module.exports = router
