@@ -1,6 +1,6 @@
 # gitginore for a node express project
 node_modules
 npm-debug.log
-.env
+src/.env
 ```
 

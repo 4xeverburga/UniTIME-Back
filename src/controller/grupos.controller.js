@@ -17,10 +17,10 @@ const getEventosGrupos = async (req, res) => {
 
 const getGrupoById = async (req, res) => {
     const id = req.params.id;
-    const response = await pool.query('select * from lista_grupos_pulic where cod_grupo = $1;', [id]);
-    res.json(response.rows);
+    const response = await pool.query('SELECT * FROM grupo_solo WHERE cod_grupo = $1;', [id]);
     res.status(200).json(response.rows);
-}
+  }
+  
 
 module.exports = {
     getGrupos,
