@@ -98,7 +98,7 @@ const get_tasks_for_stage_user = async (id_etapa,cod_usuario) => {
 
 
 //Calificación de una tarea (INTERFAZ 2) calificacion es un int
-const calificar_tarea = async (cod_usuario,cod_evento,calificacion) => {
+const rate_task = async (cod_usuario,cod_evento,calificacion) => {
   try {
     const txt = 'update asignacion set calificacion = '+calificacion+' where cod_usuario = \''+cod_usuario+'\' and cod_evento = \''+cod_evento+'\'';
     const res = await pool.query(txt);
@@ -150,7 +150,7 @@ module.exports = {
   create_task, 
   get_stages_for_project,
   get_tasks_for_stage,get_tasks_for_stage_user,
-  calificar_tarea
+  rate_task
 };
 
 //PRUEBASSS:

@@ -83,4 +83,36 @@ router.get('/tareas/create_task', (req,res) =>{
 }
 );
 
-module.exports = router
+// Peticion para crear proyectos
+router.get('/proyectos/create_project', (req,res) =>{
+	const nombre = req.params.nombre;
+	const descripcion = req.params.descripcion;
+	const fecha_inicio = req.params.fecha_inicio;
+	const fecha_fin = req.params.fecha_fin;
+	const jefe_proyecto = req.params.jefe_proyecto;
+	const idGrupo = req.params.idGrupo;
+	const result = modulos.create_project(nombre,descripcion,fecha_inicio,fecha_fin,jefe_proyecto,idGrupo);
+	result.then(resultado => {
+		console.log(resultado);
+		res.json(resultado);
+		}).catch((err) => {
+		console.error(err.message);
+		res.status(500).json({ error: 'Internal server error' });
+	});
+});
+
+// Peticion para hacer una calificacion a una tarea
+router.get('/tareas/rate_task', (req,res) =>{
+	const idTarea = req.params.idTarea;
+	const idUsuario = req.params.idUsuario;
+	const calificacion = req.params.calificacion;
+	const result = modulos.rate_task(idUsuario,idTarea,calificacion);
+	result.then(resultado => {
+		console.log(resultado);
+		res.json(resultado);
+		}).catch((err) => {
+		console.error(err.message);
+		res.status(500).json({ error: 'Internal server error' });
+	});
+});
+module.exports = router;
