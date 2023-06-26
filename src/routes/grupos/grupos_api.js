@@ -1,6 +1,5 @@
 express = require('express');
-const {getGrupos, getGrupoById} = require('../../controller/grupos.controller');
-const router = Router(); //ejecuta el metodo Router
+const router = express.Router();
 
 const {getGrupos, getGrupoById,getEventosGrupos} = require('../../controller/grupos.controller');
 
