@@ -95,7 +95,17 @@ const get_tasks_for_stage_user = async (id_etapa,cod_usuario) => {
     throw error;
   }
 };
-
+//Calificación de una tarea (INTERFAZ 2) calificacion es un int
+const calificar_tarea = async (cod_usuario,cod_evento,calificacion) => {
+  try {
+    const txt = 'update asignacion set calificacion = '+calificacion+' where cod_usuario = \''+cod_usuario+'\' and cod_evento = \''+cod_evento+'\'';
+    const res = await pool.query(txt);
+    console.log('Se ha calificado correctamente la asignacion');
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+    throw error;
+  }
+};
 
 
 
@@ -132,7 +142,7 @@ const create_task = async (cod_user, descripcion_tarea, cod_etapa, nombre_tarea,
   }
 };
 
-module.exports = { create_project, get_projects_for_grupo ,create_task, get_stages_for_project,get_tasks_for_stage,get_tasks_for_stage_user, pool};
+module.exports = { create_project, get_projects_for_grupo ,create_task, get_stages_for_project,get_tasks_for_stage,get_tasks_for_stage_user,calificar_tarea, pool};
 
 //PRUEBASSS:
 //const xd = create_task('US123456','tarea de prueba','ET345678','tarea1','comentario','01/01/2021','13:00','14:00','GR456789');
@@ -159,3 +169,4 @@ prueba.then(resultado => {
   } );
 }
 );*/
+calificar_tarea('US234567','EV234567',5);
