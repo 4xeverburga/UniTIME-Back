@@ -3,11 +3,10 @@ const router = express.Router();
 const cors = require('cors');
 const corsOptions = { origin:'*' };
 
-const {getHorarioById} =require('../../controller/horarios.controller')
+const {getHorarioById, getHorarios} =require('../../controller/horarios.controller')
 
-router.get('/',(req,res)=>{
-  res.send('Funciona');
-  });
+//muestra todos los horarios del usuario
+router.get('/',cors(corsOptions),getHorarios);
 
 //mostrar el horario por codigodehorario
 router.get('/:id',cors(corsOptions),getHorarioById);
