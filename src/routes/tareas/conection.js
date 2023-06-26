@@ -1,79 +1,77 @@
-// const { Pool } = require('pg');
-// const pool = new Pool({
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'databse_drop',
-//   password: 'jonathan28',
-//   port: 5432, 
-// });
+
+const pool = require('../../config/db')
+
 // //retorna el ultimo proyecto actualizado (funcion de apoyo) ✓
-// const last_project = async() => {
-//   try {
-//     const txt='SELECT id_proyecto FROM proyecto ORDER BY id_proyecto DESC LIMIT 1';
-//     const res = await pool.query(txt);
-//     return res.rows[0]; 
-//   } catch (error) {
-//     console.error('Error al obtener los datos:', error);
-//     throw error;
-//   } 
-//   //pool.end();
-// }
+const last_project = async() => {
+  try {
+    const txt='SELECT id_proyecto FROM proyecto ORDER BY id_proyecto DESC LIMIT 1';
+    const res = await pool.query(txt);
+    return res.rows[0]; 
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+    throw error;
+  } 
+  //pool.end();
+}
+
 // //retorna el ultimo evento actualizado (funcion de apoyo) ✓
-// const last_event = async() => {
-//   try {
-//     const txt='SELECT cod_evento FROM evento ORDER BY cod_evento DESC LIMIT 1';
-//     const res = await pool.query(txt);
-//     return res.rows[0]; 
-//   } catch (error) {
-//     console.error('Error al obtener los datos:', error);
-//     throw error;
-//   } 
-//   //pool.end();
-// }
+const last_event = async() => {
+  try {
+    const txt='SELECT cod_evento FROM evento ORDER BY cod_evento DESC LIMIT 1';
+    const res = await pool.query(txt);
+    return res.rows[0]; 
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+    throw error;
+  } 
+  //pool.end();
+}
+
 // //retorna el ultimo evento actualizado (funcion de apoyo){REVISARRRRRRRRR}
-// const last_etapa = async() => {
-//   try {
-//     const txt='SELECT id_etapa FROM evento ORDER BY id_etapa DESC LIMIT 1';
-//     const res = await pool.query(txt);
-//     return res.rows[0]; 
-//   } catch (error) {
-//     console.error('Error al obtener los datos:', error);
-//     throw error;
-//   } 
-//   //pool.end();
-// }
+const last_etapa = async() => {
+  try {
+    const txt='SELECT id_etapa FROM evento ORDER BY id_etapa DESC LIMIT 1';
+    const res = await pool.query(txt);
+    return res.rows[0]; 
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+    throw error;
+  } 
+  //pool.end();
+}
 
 // //Carga de página con los 4 proyectos que aparecen (INTERFAZ 1) (la salida del date es:Wed Feb 01 2023 00:00:00 GMT-0500 (hora estándar de Perú) ) ✓
-// const get_projects_for_grupo = async(cod_grupo) => {
-//   try {
-//     const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto where cod_grupo = \''+cod_grupo+'\' ORDER BY fecha_fin LIMIT 100 ';
-//     const res = await pool.query(txt);
-//     return res.rows; 
-//   } catch (error) {
-//     console.error('Error al obtener los datos:', error);
-//     throw error;
-//   }
-// }
+const get_projects_for_grupo = async(cod_grupo) => {
+  try {
+    const txt='SELECT fecha_inicio, fecha_fin, nombre FROM proyecto where cod_grupo = \''+cod_grupo+'\' ORDER BY fecha_fin LIMIT 100 ';
+    const res = await pool.query(txt);
+    return res.rows; 
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+    throw error;
+  }
+}
+
 // //creacion de proyectos (INTERFAZ 1)✓
-// const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proyecto,cod_grupo) => {
-//   try {
-//     const last = last_project();
-//      last.then(resultado => {
-//       const number = resultado.id_proyecto.slice(2);
-//       const numb = parseInt(number) + 1;
-//       const newcode = 'PT' + numb;
-//       const txt='insert into proyecto values (\''+newcode+'\',\''+nombre+'\',\''+description+'\',\''+fecha_inicio+'\',\''+fecha_fin+'\',\'planificado\',\''+jefe_proyecto+'\',\''+cod_grupo+'\')';
-//       pool.query(txt);
+const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proyecto,cod_grupo) => {
+  try {
+    const last = last_project();
+     last.then(resultado => {
+      const number = resultado.id_proyecto.slice(2);
+      const numb = parseInt(number) + 1;
+      const newcode = 'PT' + numb;
+      const txt='insert into proyecto values (\''+newcode+'\',\''+nombre+'\',\''+description+'\',\''+fecha_inicio+'\',\''+fecha_fin+'\',\'planificado\',\''+jefe_proyecto+'\',\''+cod_grupo+'\')';
+      pool.query(txt);
 
-//      console.log('Los datos se han guardado correctamente en la base de datos.');
-//     });
-//   } catch (error) {
-//     console.error('Error al guardar los datos en la base de datos:', error);
-//   }
-// }
+     console.log('Los datos se han guardado correctamente en la base de datos.');
+    });
+  } catch (error) {
+    console.error('Error al guardar los datos en la base de datos:', error);
+  }
+}
 
 
-//entrega de todas las tareas que se encuentran en una etapa(para el admin) (INTERFAZ 2) ✓
+// //entrega de todas las tareas que se encuentran en una etapa(para el admin) (INTERFAZ 2) ✓
 const get_tasks_for_stage = async (id_etapa) => {
   try {
     const txt = 'select * from tarea where cod_etapa = \''+id_etapa+'\'ORDER BY dia_asignado LIMIT 100';
@@ -84,6 +82,8 @@ const get_tasks_for_stage = async (id_etapa) => {
     throw error;
   }
 };
+
+
 //entrega de todas las tareas pertenecientes al user que se encuentran en una etapa (INTERFAZ 2) ✓
 const get_tasks_for_stage_user = async (id_etapa,cod_usuario) => {
   try {
@@ -95,6 +95,8 @@ const get_tasks_for_stage_user = async (id_etapa,cod_usuario) => {
     throw error;
   }
 };
+
+
 //Calificación de una tarea (INTERFAZ 2) calificacion es un int
 const calificar_tarea = async (cod_usuario,cod_evento,calificacion) => {
   try {
@@ -170,3 +172,7 @@ prueba.then(resultado => {
 }
 );*/
 calificar_tarea('US234567','EV234567',5);
+
+module.exports = {
+  
+}

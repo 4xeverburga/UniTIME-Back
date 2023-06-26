@@ -40,4 +40,9 @@ router.get('/tareas/:idEtapa', (req,res) =>{
 		res.status(500).json({ error: 'Internal server error' });
 	})
 });
+
+/*
+MIGRACION DE FUNCIONES ANTIGUAS
+*/
+
 module.exports = router
