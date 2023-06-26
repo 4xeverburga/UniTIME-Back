@@ -1,12 +1,4 @@
-const {Pool} = require('pg');
-
-const pool = new Pool({
-    host: 'localhost',
-    user: 'postgres',
-    password: '123',
-    database: 'postgres',
-    port: '5433'
-})
+const pool = require('../config/db');
 
 const getGrupos = async (req, res) => {
     const response = await pool.query('select * from lista_grupos_pulic;');
@@ -34,5 +26,4 @@ module.exports = {
     getGrupos,
     getGrupoById,
     getEventosGrupos,
-    pool
 }

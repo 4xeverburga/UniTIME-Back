@@ -1,7 +1,7 @@
-const {Router} = require('express'); //importa desde el modulo express el metodo Router
+express = require('express');
+const {getGrupos, getGrupoById} = require('../../controller/grupos.controller');
 const router = Router(); //ejecuta el metodo Router
 
-const corsOptions = { origin:'*' };
 const {getGrupos, getGrupoById,getEventosGrupos} = require('../../controller/grupos.controller');
 
 

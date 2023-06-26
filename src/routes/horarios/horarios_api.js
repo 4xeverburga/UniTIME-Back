@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const cors = require('cors');
-const corsOptions = { origin:'*' };
 
-const {getHorarioById} =require('../../controller/horarios.controller')
+const {getHorarioById, getHorarios, showEventsGroup} =require('../../controller/horarios.controller')
 
-router.get('/',(req,res)=>{
-  res.send('Funciona');
-  });
+//muestra los eventos de un grupo por codGrupo //esto y el getHorarioById son lo mismo xd
+router.get('/groups/:id',showEventsGroup);
+
+//muestra todos los horarios del usuario
+router.get('/',getHorarios);
 
 //mostrar el horario por codigodehorario
-router.get('/:id',cors(corsOptions),getHorarioById);
+router.get('/:id', getHorarioById);
 
 
 module.exports= router;
