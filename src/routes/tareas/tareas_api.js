@@ -19,17 +19,13 @@ router.get('/proyectos/:idGrupo', (req, res) => {
 
 // pedir las etapas de un proyecto 
 router.get('/etapas/:idProyecto', (req,res) =>{
-	try{
-		const {idProyecto} = req.params
-		console.log('SELECT * FROM etapa WHERE id_proyecto =' +idProyecto+' ORDER BY fecha_inicio LIMIT 4;')
-		result = pool.query(
-			'SELECT * FROM etapa WHERE id_proyecto =' +idProyecto+' ORDER BY fecha_inicio LIMIT 4;'
-		)
-		res.send(result.rows);
-	} catch (err){
+	const idProyecto = req.params.idProyecto
+	result = pool.query('SELECT * FROM etapa WHERE id_proyecto=\''+idProyecto+'\' ORDER BY fecha_inicio LIMIT 4;').then((result) => {
+		res.json(result.rows);
+	}).catch((err) => {
 		console.error(err.message);
 		res.status(500).json({ error: 'Internal server error' });
-	}
+	})
 	// res.send('hola');
 });
 
