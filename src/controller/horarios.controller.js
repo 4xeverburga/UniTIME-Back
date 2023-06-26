@@ -31,9 +31,17 @@ const getHorarioMember = async (req,res)=>{
   res.json(response.rows);
 }
 
+const getPersonalHorarios = async (req,res)=>{
+  const idusuario= 'US000001';
+  const text='select * from usuario u inner join horario h on (h.cod_usuario=u.cod_usuario) inner join evento e on (e.cod_horario=h.cod_horario) where u.cod_usuario = \''+idusuario+'\' and e.cod_grupo is null;';
+  const response = await pool.query(text);
+  res.json(response.rows);
+}
+
 module.exports={ 
   getHorarioById,
   getHorarios,
   showEventsGroup,
-  getHorarioMember
+  getHorarioMember,
+  getPersonalHorarios
 }
