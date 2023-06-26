@@ -1,12 +1,4 @@
-const { Pool } = require('pg');
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres',
-  password: '12345',
-  port: 5432
-});
-
+const pool = require('../config/db');
 const getHorarioById = async (req,res)=>{
   const idusuario= 'US000001'
   const id = req.params.id;
@@ -17,5 +9,4 @@ const getHorarioById = async (req,res)=>{
 
 module.exports={ 
   getHorarioById,
-  pool
 }
