@@ -24,8 +24,16 @@ const getHorarioById = async (req,res)=>{
   //res.status(200).json(response.rows);
 };
 
+const getHorarioMember = async (req,res)=>{
+  const {idmember} =req.params;
+  const text='select * from horario h inner join usuario u on (h.cod_usuario=u.cod_usuario) inner join evento e on (e.cod_horario =h.cod_horario) where u.cod_usuario=\''+idmember+'\' and h.flg_privacidad =1;';
+  const response = await pool.query(text);
+  res.json(response.rows);
+}
+
 module.exports={ 
   getHorarioById,
   getHorarios,
   showEventsGroup,
+  getHorarioMember
 }
