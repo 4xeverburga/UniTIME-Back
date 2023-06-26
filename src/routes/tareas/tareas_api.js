@@ -7,8 +7,7 @@ const pool = require('../../config/db');
 router.get('/proyectos/:idUsuario', (req, res) => {
 	const idGrupo = req.params.idGrupo
 	result = pool.query(
-		`SELECT * FROM PROYECTO WHERE cod_grupo =
-		(select cod_grupo from integrante where cod_usuario = 'US123456' and rol = 'jefe') ;`
+		`select * from proyecto where jefe_proyecto = 'US123456';`
 	).then((result) =>{
 		res.json(result.rows);
 	}).catch((err)=>{
