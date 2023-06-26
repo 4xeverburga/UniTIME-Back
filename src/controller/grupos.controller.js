@@ -9,11 +9,18 @@ const pool = new Pool({
 })
 
 const getGrupos = async (req, res) => {
-    const response = await pool.query('select * from usuarios ;');
+    const response = await pool.query('select * from lista_grupos_pulic;');
     res.status(200).json(response.rows);
     console.log(response.rows);
+    console.log('hola');
 
     
+}
+
+const getEventosGrupos = async (req, res) => {
+    const response = await pool.query('select * from eventos_grupo ;');
+    res.status(200).json(response.rows);
+    console.log(response.rows);
 }
 
 const getGrupoById = async (req, res) => {
@@ -26,5 +33,6 @@ const getGrupoById = async (req, res) => {
 module.exports = {
     getGrupos,
     getGrupoById,
+    getEventosGrupos,
     pool
 }

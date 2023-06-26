@@ -9,7 +9,7 @@ const routerApi = require('./src/routes/indexRoutes');
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:5173"
 };
 
 app.use(cors(corsOptions));
@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(require('./src/routes/grupos/grupos_api'));
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the application." });
