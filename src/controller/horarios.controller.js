@@ -47,7 +47,7 @@ const createEvents = async(req,res)=>{
   const cod_horario=body.cod_horario;
   const cod_grupo = body.cod_grupo;
   const text = 'insert into evento(cod_evento,descripcion_evento,hora_inicio,hora_fin,cod_horario,cod_grupo) values(\''+cod_evento+'\',\''+descripcion_evento+'\',\''+hora_inicio+'\',\''+hora_fin+'\',\''+cod_horario+'\',\''+cod_grupo+'\');';
-  const response = await pool.query(text);
+  await pool.query(text);
   res.json({
     message:'created',
     data:body
@@ -59,7 +59,7 @@ const modifyEvent = async(req,res)=>{
   const body = req.body;
   const hora_inicio=body.hora_inicio;
   const text='update evento set hora_inicio = \''+hora_inicio+'\' where cod_evento=\''+id+'\'';
-  const response = await pool.query(text);
+  await pool.query(text);
   res.json({
     message:'modify',
     data:body
@@ -74,7 +74,7 @@ const createAviso = async(req,res)=>{
   const fecha_aviso=body.fecha_aviso;
   const cod_evento=body.cod_evento;
   const text = 'insert into aviso(cod_aviso,prioridad,contenido,fecha_aviso,cod_evento) values(\''+cod_aviso+'\',\''+prioridad+'\',\''+contenido+'\',\''+fecha_aviso+'\',\''+cod_evento+'\');';
-  const response = await pool.query(text);
+  await pool.query(text);
   res.json({
     message:'created aviso',
     data:body
@@ -86,7 +86,7 @@ const modifyAviso = async(req,res)=>{
   const body = req.body;
   const fecha_aviso=body.fecha_aviso;
   const text ='update aviso set fecha_aviso=\''+fecha_aviso+'\' where cod_aviso=\''+id+'\'';
-  const response = await pool.query(text);
+  await pool.query(text);
   res.json({
     message:'modify aviso',
     data:body
