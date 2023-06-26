@@ -1,6 +1,6 @@
 express = require('express');
-const db = require('./db-config');
-const {sql} = require('@databases/pg');
+//const db = require('./db-config');
+//const {sql} = require('@databases/pg');
 const cors = require('cors');
 
 const corsOptions = { origin:'*' };
