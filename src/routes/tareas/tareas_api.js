@@ -21,7 +21,9 @@ router.get('/proyectos/:idUsuario', (req, res) => {
 
 // pedir las etapas de un proyecto 
 router.get('/etapas/:idProyecto', (req,res) =>{
-	const idProyecto = req.params.idProyecto
+	// const idProyecto = req.params.idProyecto
+	// TOFIX: add projects from idProyecto to the database
+	const idProyecto = 'PT123456'
 	result = pool.query('SELECT * FROM etapa WHERE id_proyecto=\''+idProyecto+'\' ORDER BY fecha_inicio LIMIT 4;')
 	.then((result) => {
 		res.json(result.rows);
