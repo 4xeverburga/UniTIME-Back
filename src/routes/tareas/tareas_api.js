@@ -34,7 +34,7 @@ router.get('/etapas/:idProyecto', (req,res) =>{
 // pedir las tareas de una etapa
 router.get('/tareas/:idEtapa', (req,res) =>{
 	const idEtapa = req.params.idEtapa
-	result = pool.query('SELECT * FROM etapa WHERE id_proyecto=\''+idProyecto+'\' ORDER BY fecha_inicio LIMIT 4;')
+	result = pool.query('SELECT * FROM etapa WHERE id_proyecto=\''+idEtapa+'\' ORDER BY fecha_inicio LIMIT 4;')
 	.then((result) => {
 		res.json(result.rows);
 	}).catch((err) => {
