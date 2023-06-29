@@ -34,8 +34,8 @@ router.get('/etapas/:idProyecto', (req,res) =>{
 
 // pedir las tareas de una etapa
 router.get('/tareas/:idEtapa', (req,res) =>{
-	//const idEtapa = req.params.idEtapa
-	const idEtapa = 'ET123456'
+	const idEtapa = req.params.idEtapa
+	//const idEtapa = 'ET123456'
 	const txt_alterno = 'select t.nombre, t.dia_asignado as fecha, a.estado, u.nombres as responsable from tarea t  join asignacion a on t.cod_evento = a.cod_evento join usuario u on u.cod_usuario = a.cod_usuario where cod_etapa = \'' + idEtapa+ '\' ORDER BY dia_asignado LIMIT 100';
 	result=modulos.get_tasks_for_stage(idEtapa).then((result) => {
 		res.json(result);
