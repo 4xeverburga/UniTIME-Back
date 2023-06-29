@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../../config/db');
-const modulos  = require('./conection.js');
-
+const modulos = require('./function');
 
 // pedir las ultimas 100 proyectos de acuerdo a grupo de un usuario
 // TODO: implementar :idGrupo de acuerdo al usuario 
