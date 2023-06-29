@@ -94,6 +94,9 @@ const get_tasks_for_stage_user = async (id_etapa,cod_usuario) => {
     console.error('Error al obtener los datos:', error);
     throw error;
   }
+  finally{
+    
+  }
 };
 
 
