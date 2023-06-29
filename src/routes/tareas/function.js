@@ -74,7 +74,7 @@ const create_project = async(nombre,description,fecha_inicio,fecha_fin,jefe_proy
 // //entrega de todas las tareas que se encuentran en una etapa(para el admin) (INTERFAZ 2) ✓
 const get_tasks_for_stage = async (id_etapa) => {
   try {
-    const txt = 'select * from tarea where cod_etapa = \''+id_etapa+'\'ORDER BY dia_asignado LIMIT 100';
+    const txt = 'select t.nombre, t.dia_asignado as fecha, a.estado, u.nombres as responsable from tarea t  join asignacion a on t.cod_evento = a.cod_evento join usuario u on u.cod_usuario = a.cod_usuario where cod_etapa = \'' + id_etapa+ '\' ORDER BY dia_asignado LIMIT 100';
     const res = await pool.query(txt);
     return res.rows;
   } catch (error) {

@@ -34,8 +34,10 @@ router.get('/etapas/:idProyecto', (req,res) =>{
 
 // pedir las tareas de una etapa
 router.get('/tareas/:idEtapa', (req,res) =>{
-	const idEtapa = req.params.idEtapa
-	result = pool.query('SELECT * FROM etapa WHERE id_proyecto=\''+idEtapa+'\' ORDER BY fecha_inicio LIMIT 4;')
+	//const idEtapa = req.params.idEtapa
+	const idEtapa = 'ET123456'
+	const txt_alterno = 'select * from tarea where cod_etapa =\'' + idEtapa+ '\' ORDER BY dia_asignado LIMIT 100';
+	result = pool.query('select t.nombre, t.dia_asignado as fecha, a.estado, u.nombres as responsable from tarea t  join asignacion a on t.cod_evento = a.cod_evento join usuario u on u.cod_usuario = a.cod_usuario where cod_etapa = \'' + idEtapa+ '\' ORDER BY dia_asignado LIMIT 100')
 	.then((result) => {
 		res.json(result.rows);
 	}).catch((err) => {
