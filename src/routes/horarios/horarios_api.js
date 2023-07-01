@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {getHorarioById, getHorarios, showEventsGroup,getHorarioMember,getPersonalHorarios,createEvents,modifyEvent,createAviso,modifyAviso} =require('../../controller/horarios.controller')
+const {getHorarioById, getHorarios, showEventsGroup,getHorarioMember,getPersonalHorarios,createEvents,modifyEvent,createAviso,modifyAviso,addHorario} =require('../../controller/horarios.controller')
 
 //muestra los eventos de un grupo por codGrupo //esto y el getHorarioById son lo mismo xd
 router.get('/groups/:id',showEventsGroup);
@@ -30,5 +30,8 @@ router.post('/events/aviso/create',createAviso);
 
 //modificar aviso
 router.patch('/events/aviso/:id',modifyAviso);
+
+//crear horario personal
+router.post('/agregarHorario',addHorario)
 
 module.exports= router;
