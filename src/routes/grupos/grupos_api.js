@@ -1,7 +1,8 @@
 express = require('express');
 const router = express.Router();
 
-const {getGrupos, getGrupoById,getEventosGrupos, addgrupo, addMiembro} = require('../../controller/grupos.controller');
+const   {getGrupos, getGrupoById,getEventosGrupos, addgrupo, addMiembro,editardescripciongrupo,
+        editarnombregrupo} = require('../../controller/grupos.controller');
 
 router.post('/addgrupo', addgrupo)
 
@@ -15,5 +16,9 @@ router.get('/getgrupos/:id',getGrupoById)
 router.get('/geteventosgrupos',getEventosGrupos)
 
 router.post('/addmiembro', addMiembro)
+
+router.post('/editardescripciongrupo', editardescripciongrupo)
+
+router.post('/editarnombregrupo', editarnombregrupo)
 
 module.exports = router;
